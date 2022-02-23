@@ -1,9 +1,7 @@
 <template>
   <v-app>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-btn icon>
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
+    <v-app-bar fixed app>
+      <movie-search />
     </v-app-bar>
     <v-main>
       <Nuxt />
@@ -15,8 +13,10 @@
 </template>
 
 <script>
+import MovieSearch from '../components/MovieSearch.vue'
 export default {
   name: 'DefaultLayout',
+  components: { MovieSearch },
   data() {
     return {
       clipped: false,
