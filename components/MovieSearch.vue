@@ -9,8 +9,9 @@
             clearable
             placeholder="Search Movie"
             type="text"
-            @click:append-outer="sendMessage"
-            @click:clear="clearMessage"
+            hide-details
+            @click:append-outer="searchBtn"
+            @click:clear="clearSearch"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -19,38 +20,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
+// import axios from 'axios'
+
 export default {
   name: 'MovieSearch',
   data() {
     return {
-      password: 'Password',
-      show: false,
       searchInput: '',
-      iconIndex: 0,
-      icons: [
-        'mdi-emoticon',
-        'mdi-emoticon-cool',
-        'mdi-emoticon-dead',
-        'mdi-emoticon-excited',
-        'mdi-emoticon-happy',
-        'mdi-emoticon-neutral',
-        'mdi-emoticon-sad',
-        'mdi-emoticon-tongue',
-      ],
     }
   },
-
-  computed: {
-    icon() {
-      return this.icons[this.iconIndex]
-    },
-  },
+  computed: {},
 
   methods: {
-    sendMessage() {
-      this.clearMessage()
+    ...mapActions(['searchMovies']),
+    searchBtn() {
+      this.searchMovies(this.searchInput)
+      this.clearSearch()
     },
-    clearMessage() {
+    clearSearch() {
       this.searchInput = ''
     },
   },
