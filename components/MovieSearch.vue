@@ -31,13 +31,13 @@ export default {
       searchInput: '',
     }
   },
-  computed: {},
+  computed: {
+  },
 
   methods: {
     ...mapActions(['searchMovies']),
     searchBtn() {
       this.searchMovies(this.searchInput)
-      this.clearSearch()
     },
     clearSearch() {
       this.searchInput = ''

@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <!--Hero -->
-    <movie-hero />
+    <movie-hero :movies="movies"/>
+
+    <!--Hero -->
+    <loading-movie v-if="$fetchState.pending" />
 
     <!--Movies -->
     <movie-grid :movies="movies" />
@@ -12,12 +15,14 @@
 import axios from 'axios'
 import MovieHero from '../components/MovieHero.vue'
 import MovieGrid from '../components/MovieGrid.vue'
+import LoadingMovie from '../components/LoadingMovie.vue'
 
 export default {
   name: 'IndexPage',
   components: {
     MovieHero,
     MovieGrid,
+    LoadingMovie,
   },
   data() {
     return {
@@ -27,7 +32,7 @@ export default {
   async fetch() {
     await this.getMovies()
   },
-
+  fetchDelay: 10000,
   methods: {
     async getMovies() {
       await axios

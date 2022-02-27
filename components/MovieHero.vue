@@ -15,23 +15,30 @@
 <script>
 export default {
   name: 'MovieHero',
+  props: {
+    movies: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
-      items: [
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-        },
-      ],
+      items: [],
     }
+  },
+  computed: {},
+  mounted() {
+    this.getImageCarousel()
+  },
+  methods: {
+    getImageCarousel() {
+      const imagePath = this.movies.map((x) => {
+        return { src: `https://image.tmdb.org/t/p/w500/${x.poster_path}` }
+      })
+      const imageSelected = imagePath.slice(0, 4)
+
+      this.items = imageSelected
+    },
   },
 }
 </script>
